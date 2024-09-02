@@ -1,0 +1,61 @@
+default_language_version:
+  node: 16.14.2
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-case-conflict
+      - id: check-docstring-first
+      - id: check-added-large-files
+        args: ["--maxkb=10000"]
+      - id: debug-statements
+      - id: check-symlinks
+      - id: check-toml
+      - id: check-yaml
+      - id: check-xml
+      - id: mixed-line-ending
+      - id: requirements-txt-fixer
+
+  - repo: https://github.com/psf/black
+    rev: 22.3.0
+    hooks:
+      - id: black
+        args: [--line-length=88]
+
+  - repo: https://github.com/charliermarsh/ruff-pre-commit
+    rev: v0.1.5
+    hooks:
+      - id: ruff
+  #        args: ["--force-exclude"]
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.7.0
+    hooks:
+      - id: mypy
+        args:
+          [
+            "--disallow-untyped-defs",
+            "--show-error-codes",
+            "--ignore-missing-imports",
+            "--disable=arg-type",
+            "--disable=union-attr",
+            "--disable=index",
+            "--disable=operator",
+          ]
+        verbose: true
+        entry: bash -c 'mypy "$@" || true' --
+
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v3.1.0
+    hooks:
+      - id: prettier
+        args: [--prose-wrap=always, --print-width=88]
+        exclude: Pipfile*
+
+  - repo: https://github.com/PyCQA/docformatter.git
+    rev: v1.7.5
+    hooks:
+      - id: docformatter
