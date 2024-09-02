@@ -44,7 +44,7 @@ Nodes log their actions to `pot_sim.log` file. Logs are in two levels of verbosi
 
 ### Getting started
 
-To run the code, you need to have `Python >=3.8` installed on your machine.
+To run the code, you need to have `Python >=3.10` installed on your machine.
 
 #### Installing the requirements
 
